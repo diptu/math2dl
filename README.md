@@ -124,40 +124,33 @@ Key Takeaways
 ```text
 math2dl/
 │
-├── animations/                 # All Manim scenes
-│   ├── foundations/
-│   ├── ann/
-│   ├── cnn/
-│   ├── rnn/
-│   ├── attention/
-│   ├── transformers/
-│   ├── gans/
-│   ├── diffusion/
-│   └── llm/
-│
-├── implementations/            # Minimal PyTorch implementations
-│
-├── notebooks/                  # Mathematical explorations
-│
-├── papers/                     # Reading notes
-│
-├── assets/
-│   ├── images/
-│   ├── videos/
-│   └── sounds/
-│
-├── docs/
-│   ├── equations/
-│   ├── references/
-│   └── assets/
-│
-├── scripts/
-│
-├── tests/
-│
-├── pyproject.toml
+├── Dockerfile
 ├── LICENSE
-└── README.md
+├── Makefile
+├── README.md
+├── assets
+│   └── images
+├── main.py
+├── pyproject.toml
+├── src
+│   ├── animations
+│   ├── ann
+│   │   └── __init__.py
+│   ├── assets
+│   ├── cnn
+│   │   └── __init__.py
+│   ├── common
+│   │   └── __init__.py
+│   ├── docs
+│   ├── gans
+│   │   └── __init__.py
+│   ├── rnn
+│   │   └── __init__.py
+│   ├── scripts
+│   ├── tests
+│   └── transformers
+│       └── __init__.py
+└── uv.lock
 ```
 
 ---

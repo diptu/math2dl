@@ -1,0 +1,98 @@
+[project]
+name = "manim-dl-foundations"
+version = "0.1.0"
+description = "Mathematical visualization of deep learning architectures using Manim."
+authors = [
+    { name = "Nazmul Alam", email = "diptunazmulalam@gmail.com" }
+]
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.12"
+keywords = ["deep-learning", "manim", "visualization", "education", "pytorch"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Education",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Visualization",
+]
+dependencies = [
+    "loguru>=0.7.3",
+    "manim>=0.20.1",
+    "numpy>=2.5.1",
+    "pydantic>=2.13.4",
+    "torch>=2.13.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/diptu/math2dl"
+Repository = "https://github.com/diptu/math2dl.git"
+Issues = "https://github.com/diptu/math2dl/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+# Flat src layout: each topic is a top-level importable package.
+# Tests are intentionally excluded from the distributed wheel.
+packages = [
+    "src/ann",
+    "src/cnn",
+    "src/rnn",
+    "src/gans",
+    "src/transformers",
+    "src/common",
+]
+
+[dependency-groups]
+dev = [
+    "bandit>=1.9.4",
+    "mypy>=2.3.0",
+    "pytest>=9.1.1",
+    "pytest-cov>=7.1.0",
+    "ruff>=0.15.21",
+    "types-python-dateutil>=2.9.0.20260518",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["src/tests"]
+
+[tool.ruff]
+# Target Python 3.12 (as specified in your project requirements)
+target-version = "py312"
+line-length = 88
+
+[tool.ruff.lint]
+# E: pycodestyle errors, F: Pyflakes, I: isort, UP: pyupgrade
+# ANN: Annotations (essential for your ML engineering code)
+select = ["E", "F", "I", "UP", "ANN", "B", "PL"]
+
+# Ensure specific rules for your ML logic
+[tool.ruff.lint.isort]
+known-first-party = ["ann", "cnn", "rnn", "gans", "transformers", "common"]
+section-order = ["future", "standard-library", "third-party", "first-party", "local-folder"]
+
+[tool.ruff.format]
+# Enable auto-formatting
+quote-style = "double"
+indent-style = "space"
+
+[tool.mypy]
+# Essential for ML projects
+python_version = "3.12"
+strict = true
+show_error_codes = true
+enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
+
+# Ignore missing stubs for third-party libraries that don't have them
+[[tool.mypy.overrides]]
+module = [
+    "numpy.*",
+]
+ignore_missing_imports = true
+
+# NumPy ships a mypy plugin for precise dtype/shape typing.
+plugins = ["numpy.typing.mypy_plugin"]
